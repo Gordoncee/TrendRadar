@@ -117,15 +117,3 @@ platforms:
     name: "知乎"
   - id: "hupu"
     name: "虎扑"
-
-  # === 科技类平台 ===
-  - id: "ithome"
-    name: "IT之家"
-  - id: "juejin"
-    name: "掘金"
-  - id: "github"
-    name: "GitHub"
-  - id: "nowcoder"
-    name: "远景论坛"
-  - id: "sspai"
-    name: "少数派"
