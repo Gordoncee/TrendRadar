@@ -1,0 +1,45 @@
+name: Daily Thinking Model Email
+
+on:
+  schedule:
+    # GitHub Actions uses UTC. 23:00 UTC = 07:00 Beijing time next day.
+    - cron: "0 23 * * *"
+  workflow_dispatch:
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      TZ_NAME: Asia/Shanghai
+      START_DATE: "2026-07-05"
+      # Native names used by this project.
+      SMTP_HOST: ${{ secrets.SMTP_HOST }}
+      SMTP_PORT: ${{ secrets.SMTP_PORT }}
+      SMTP_SECURITY: ${{ secrets.SMTP_SECURITY }}
+      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+      MAIL_FROM: ${{ secrets.MAIL_FROM }}
+      MAIL_FROM_NAME: ${{ secrets.MAIL_FROM_NAME }}
+      MAIL_TO: ${{ secrets.MAIL_TO }}
+      SUBJECT_PREFIX: ${{ secrets.SUBJECT_PREFIX }}
+      # TrendRadar-compatible names. If you place this workflow in
+      # Gordoncee/TrendRadar, it can reuse the existing Outlook email secrets.
+      EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+      EMAIL_TO: ${{ secrets.EMAIL_TO }}
+      EMAIL_SMTP_SERVER: ${{ secrets.EMAIL_SMTP_SERVER }}
+      EMAIL_SMTP_PORT: ${{ secrets.EMAIL_SMTP_PORT }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Send daily model email
+        run: python thinking_model_mailer/send_daily_model.py
