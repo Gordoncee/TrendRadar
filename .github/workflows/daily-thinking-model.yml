@@ -13,7 +13,7 @@ jobs:
       contents: read
     env:
       TZ_NAME: Asia/Shanghai
-      START_DATE: "2026-07-06"
+      START_DATE: "2026-07-05"
       # Native names used by this project.
       SMTP_HOST: ${{ secrets.SMTP_HOST }}
       SMTP_PORT: ${{ secrets.SMTP_PORT }}
