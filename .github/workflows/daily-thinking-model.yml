@@ -2,8 +2,9 @@ name: Daily Thinking Model Email
 
 on:
   schedule:
-    # GitHub Actions uses UTC. 23:00 UTC = 07:00 Beijing time next day.
-    - cron: "0 23 * * *"
+    # GitHub Actions uses UTC. 23:07 UTC = 07:07 Beijing time next day.
+    # Avoid minute 0 because GitHub may delay or drop scheduled runs at peak load.
+    - cron: "7 23 * * *"
   workflow_dispatch:
 
 jobs:
