@@ -6,6 +6,11 @@ on:
     # Avoid minute 0 because GitHub may delay or drop scheduled runs at peak load.
     - cron: "7 23 * * *"
   workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - "thinking_model_mailer/force_send.txt"
 
 jobs:
   send:
